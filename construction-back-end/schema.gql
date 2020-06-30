@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CompanyDto {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  companies: [CompanyDto!]!
+  findCompanyById(id: Float!): CompanyDto!
+}
+
+type Mutation {
+  createCompany(input: CompanyInput!): CompanyDto!
+  updateCompany(input: CompanyInput!, id: Float!): CompanyDto!
+  deleteCompany(id: Float!): CompanyDto!
+}
+
+input CompanyInput {
+  name: String!
+}
