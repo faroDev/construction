@@ -1,11 +1,23 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { CompanyService } from 'src/modules/companies/service/company.service';
 import { CompanyDto } from 'src/modules/companies/dto/company.dto';
 import { CompanyInput } from 'src/modules/companies/inputs/company.input';
+import { ProjectsService } from '../projects/services/projects.service';
+import { ProjectDto } from '../projects/dto/project.dto';
 
-@Resolver()
+@Resolver(of => CompanyDto)
 export class CompanyResolver {
-  constructor(private readonly companyService: CompanyService) {}
+  constructor(
+    private readonly companyService: CompanyService,
+  ) // private readonly projectsService: ProjectsService,
+  {}
 
   @Query(() => [CompanyDto])
   async companies() {
@@ -27,6 +39,11 @@ export class CompanyResolver {
       console.log(error);
     }
   }
+
+  // @ResolveField()
+  // async company(@Parent() projects: ProjectDto[]) {
+  //   return this.projectsService.findAll();
+  // }
 
   @Mutation(() => CompanyDto)
   async createCompany(@Args('input') input: CompanyInput) {

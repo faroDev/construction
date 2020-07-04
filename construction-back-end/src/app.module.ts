@@ -10,11 +10,11 @@ import { ProjectsModule } from './modules/projects/projects.module';
 @Module({
   imports: [
     CompanyModule,
+    ProjectsModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
     }),
     TypeOrmModule.forRoot(),
-    ProjectsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

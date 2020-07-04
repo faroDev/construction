@@ -1,4 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { CompanyDto } from 'src/modules/companies/dto/company.dto';
 
 @ObjectType()
 export class ProjectDto {
@@ -17,6 +18,6 @@ export class ProjectDto {
   @Field()
   update: string;
 
-  @Field()
-  companyId: number;
+  @Field(type => CompanyDto, { nullable: true })
+  company: CompanyDto;
 }

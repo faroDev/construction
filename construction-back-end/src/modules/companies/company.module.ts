@@ -7,5 +7,6 @@ import { Company } from 'src/modules/companies/entity/company.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Company])],
   providers: [CompanyResolver, CompanyService],
+  exports: [CompanyService],
 })
 export class CompanyModule {}

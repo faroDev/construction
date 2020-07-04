@@ -2,14 +2,26 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type ProjectDto {
+  id: ID!
+  name: String!
+  address: String!
+  createAt: String!
+  update: String!
+  company: CompanyDto
+}
+
 type CompanyDto {
   id: ID!
   name: String!
+  projects: [ProjectDto!]!
 }
 
 type Query {
   companies: [CompanyDto!]!
   findCompanyById(id: Float!): CompanyDto!
+  projects: ProjectDto!
+  projectById(id: Float!): ProjectDto!
 }
 
 type Mutation {

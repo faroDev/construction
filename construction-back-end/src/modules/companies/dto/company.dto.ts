@@ -1,4 +1,5 @@
-import { ObjectType, Field, ID } from "@nestjs/graphql";
+import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ProjectDto } from '../../projects/dto/project.dto';
 
 @ObjectType()
 export class CompanyDto {
@@ -7,4 +8,7 @@ export class CompanyDto {
 
   @Field()
   name: string;
+
+  @Field(type => [ProjectDto])
+  projects: ProjectDto[];
 }
