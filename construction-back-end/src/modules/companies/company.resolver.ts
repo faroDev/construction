@@ -11,13 +11,15 @@ import { CompanyDto } from 'src/modules/companies/dto/company.dto';
 import { CompanyInput } from 'src/modules/companies/inputs/company.input';
 import { ProjectsService } from '../projects/services/projects.service';
 import { ProjectDto } from '../projects/dto/project.dto';
+import { Inject, forwardRef } from '@nestjs/common';
 
 @Resolver(of => CompanyDto)
 export class CompanyResolver {
   constructor(
     private readonly companyService: CompanyService,
-  ) // private readonly projectsService: ProjectsService,
-  {}
+    // @Inject(forwardRef(() => ProjectsService))
+    private readonly projectsService: ProjectsService,
+  ) {}
 
   @Query(() => [CompanyDto])
   async companies() {
@@ -40,10 +42,11 @@ export class CompanyResolver {
     }
   }
 
-  // @ResolveField()
-  // async company(@Parent() projects: ProjectDto[]) {
-  //   return this.projectsService.findAll();
-  // }
+  @ResolveField('projects', returns => [ProjectDto])
+  async getProjects(@Parent() company: CompanyDto) {
+    const { id } = company;
+    return this.projectsService.findCompany(id);
+  }
 
   @Mutation(() => CompanyDto)
   async createCompany(@Args('input') input: CompanyInput) {

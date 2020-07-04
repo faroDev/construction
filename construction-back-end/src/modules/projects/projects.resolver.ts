@@ -4,12 +4,14 @@ import { CompanyService } from '../companies/service/company.service';
 
 import { ProjectDto } from './dto/project.dto';
 import { CompanyDto } from '../companies/dto/company.dto';
+import { Inject, forwardRef } from '@nestjs/common';
 
 @Resolver(of => ProjectDto) // ???
 export class ProjectsResolver {
   constructor(
-    private companyService: CompanyService,
     private projectsService: ProjectsService,
+    // @Inject(forwardRef(() => CompanyService))
+    private companyService: CompanyService,
   ) {}
   @Query(returns => ProjectDto)
   async projects() {

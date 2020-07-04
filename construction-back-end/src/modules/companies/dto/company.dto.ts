@@ -9,6 +9,6 @@ export class CompanyDto {
   @Field()
   name: string;
 
-  @Field(type => [ProjectDto])
+  @Field(type => [ProjectDto], { nullable: true })
   projects: ProjectDto[];
 }

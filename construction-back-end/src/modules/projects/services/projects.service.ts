@@ -19,4 +19,12 @@ export class ProjectsService {
   async findAll(): Promise<Project[]> {
     return await this.projectsReposritory.find();
   }
+
+  async findCompany(idCompany: number): Promise<Project[] | void> {
+    return await this.projectsReposritory.find({
+      where: {
+        company: idCompany,
+      },
+    });
+  }
 }
