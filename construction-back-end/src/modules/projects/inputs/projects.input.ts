@@ -8,6 +8,12 @@ export class ProjectInput {
   @Field()
   address: string;
 
-  @Field()
+  @Field({ nullable: true })
+  createAt: Date;
+
+  @Field({ nullable: true })
+  updateAt: Date;
+
+  @Field({ nullable: false })
   companyId: number;
 }

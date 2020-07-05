@@ -21,6 +21,7 @@ export class Project {
   @ManyToOne(
     type => Company,
     company => company.projects,
+    { nullable: false },
   )
   company: Company;
 }

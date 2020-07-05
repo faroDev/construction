@@ -12,12 +12,12 @@ export class ProjectDto {
   @Field()
   address: string;
 
-  @Field()
-  createAt: string;
+  @Field({ nullable: true })
+  createAt: Date;
 
-  @Field()
-  update: string;
+  @Field({ nullable: true })
+  updateAt: Date;
 
-  @Field(type => CompanyDto, { nullable: true })
+  @Field(type => CompanyDto)
   company: CompanyDto;
 }
