@@ -8,7 +8,7 @@ type ProjectDto {
   address: String!
   createAt: DateTime
   updateAt: DateTime
-  company: CompanyDto!
+  company: CompanyDto
 }
 
 """
@@ -34,6 +34,8 @@ type Mutation {
   updateCompany(input: CompanyInput!, id: Float!): CompanyDto!
   deleteCompany(id: Float!): CompanyDto!
   createProject(input: ProjectInput!): ProjectDto!
+  updateProject(input: ProjectInput!, id: Float!): ProjectDto!
+  deleteProject(id: Float!): ProjectDto!
 }
 
 input CompanyInput {
@@ -41,9 +43,9 @@ input CompanyInput {
 }
 
 input ProjectInput {
-  name: String!
-  address: String!
+  name: String
+  address: String
   createAt: DateTime
   updateAt: DateTime
-  companyId: Float!
+  companyId: Float
 }

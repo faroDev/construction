@@ -12,6 +12,7 @@ export class Company {
   @OneToMany(
     type => Project,
     project => project.company,
+    { nullable: true },
   )
   projects: Project[];
 }

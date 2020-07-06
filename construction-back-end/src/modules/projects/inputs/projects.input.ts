@@ -2,10 +2,10 @@ import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class ProjectInput {
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   address: string;
 
   @Field({ nullable: true })
@@ -14,6 +14,6 @@ export class ProjectInput {
   @Field({ nullable: true })
   updateAt: Date;
 
-  @Field({ nullable: false })
+  @Field({ nullable: true })
   companyId: number;
 }

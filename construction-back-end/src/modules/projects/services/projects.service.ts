@@ -15,7 +15,10 @@ export class ProjectsService {
     private readonly companyReposritory: Repository<Company>,
   ) {}
 
-  async findOneById(idProject: number): Promise<any> {
+  async findOneById(idProject: number): Promise<Project> {
+    const e = await this.projectsReposritory.findOne(idProject);
+    console.log(e.company);
+
     return await this.projectsReposritory.findOne(idProject);
   }
 
@@ -47,5 +50,41 @@ export class ProjectsService {
     } catch (error) {
       throw new Error('No encontramos la compañia');
     }
+  }
+
+  async update(
+    projectId: number,
+    inputProject: ProjectInput,
+  ): Promise<ProjectDto | void> {
+    try {
+      const projectToUpdate = await this.projectsReposritory.findOne(projectId);
+      console.log('Project to update', projectToUpdate);
+      if (inputProject.name) {
+        projectToUpdate.name = inputProject.name;
+      }
+      if (inputProject.address) {
+        projectToUpdate.address = inputProject.address;
+      }
+
+      if (inputProject.companyId) {
+        const company = await this.companyReposritory.findOne(
+          inputProject.companyId,
+        );
+        projectToUpdate.company = company;
+      }
+      projectToUpdate.updateAt = new Date();
+      console.log('Project already update', projectToUpdate);
+      console.log(
+        'result',
+        await this.projectsReposritory.save(projectToUpdate),
+      );
+      return await this.projectsReposritory.save(projectToUpdate);
+    } catch (error) {
+      throw new Error('Error en el momento de editar');
+    }
+  }
+
+  async delete(projectId: number): Promise<any> {
+    return await this.projectsReposritory.delete(projectId);
   }
 }

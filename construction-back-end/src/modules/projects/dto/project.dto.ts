@@ -18,6 +18,6 @@ export class ProjectDto {
   @Field({ nullable: true })
   updateAt: Date;
 
-  @Field(type => CompanyDto)
+  @Field(type => CompanyDto, { nullable: false })
   company: CompanyDto;
 }
