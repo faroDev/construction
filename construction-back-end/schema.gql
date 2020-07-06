@@ -5,17 +5,45 @@
 type CompanyDto {
   id: ID!
   name: String!
+  projects: [ProjectDto!]!
 }
 
+type ProjectDto {
+  id: ID!
+  name: String!
+  address: String!
+  createAt: DateTime
+  updateAt: DateTime
+  company: CompanyDto!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
+  projects: [ProjectDto!]!
+  projectById(id: Float!): ProjectDto!
   companies: [CompanyDto!]!
   findCompanyById(id: Float!): CompanyDto!
 }
 
 type Mutation {
+  createProject(input: ProjectInput!): ProjectDto!
+  updateProject(input: ProjectInput!, id: Float!): ProjectDto!
+  deleteProject(id: Float!): ProjectDto!
   createCompany(input: CompanyInput!): CompanyDto!
   updateCompany(input: CompanyInput!, id: Float!): CompanyDto!
   deleteCompany(id: Float!): CompanyDto!
+}
+
+input ProjectInput {
+  name: String
+  address: String
+  createAt: DateTime
+  updateAt: DateTime
+  companyId: Float
 }
 
 input CompanyInput {
